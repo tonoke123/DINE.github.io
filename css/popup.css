@@ -1,0 +1,222 @@
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup {
+  background: white;
+  width: 80%;
+  max-width: 500px; /* เพิ่มขนาดจาก 400px */
+  border-radius: 15px;
+  padding: 20px; /* ลดขนาด padding ลงจาก 25px */
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.popup .close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+}
+
+.popup .tag {
+  display: inline-block;
+  background: #1e90ff;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.popup h2 {
+  font-size: 24px;
+  margin: 0 0 20px 0;
+  color: #333;
+}
+
+.popup hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 15px 0;
+}
+
+.popup p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #666;
+}
+
+.popup p span {
+  font-weight: bold;
+  color: #333;
+  margin-right: 10px;
+}
+
+.popup .detail-image {
+  width: 100%;
+  margin: 10px 0; /* ลดระยะห่างจาก 15px */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.popup .detail-image img {
+  width: 100%;
+  height: 280px; /* เพิ่มความสูงจาก 200px */
+  object-fit: contain; /* เปลี่ยนเป็น contain เพื่อให้เห็นรูปเต็ม */
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.popup .detail-image:hover img {
+  transform: scale(1.02);
+}
+
+/* ปรับขนาดรูปตาม responsive */
+@media (max-width: 768px) {
+  .popup .detail-image img {
+    height: 220px; /* เพิ่มความสูงจาก 180px สำหรับมือถือ */
+  }
+  
+  .popup {
+    width: 90%;
+    padding: 15px; /* ลด padding ลงอีกสำหรับมือถือ */
+  }
+}
+
+.popup .description {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+  font-style: italic;
+  color: #666;
+  border-left: 4px solid #007bff;
+}
+
+.popup .description p {
+  color: #555;
+  font-style: italic;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.popup .description i {
+  color: #007bff;
+  margin-right: 10px;
+}
+
+.shop-description {
+  background: #f8f9fa;
+  border-left: 4px solid #007bff;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.shop-description p {
+  color: #444;
+  font-style: italic;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 15px;
+}
+
+.shop-description i {
+  color: #007bff;
+  margin-right: 10px;
+  font-size: 20px;
+  opacity: 0.7;
+}
+
+.shop-details {
+  margin-top: 15px;
+}
+
+.shop-details p {
+  display: flex;
+  align-items: center;
+  margin: 12px 0;
+}
+
+.shop-details p i {
+  width: 20px;
+  margin-right: 10px;
+  color: #007bff;
+}
+
+/* ปรับ responsive */
+@media (max-width: 768px) {
+  .shop-description {
+    margin: 15px 0;
+    padding: 12px 15px;
+  }
+  
+  .shop-description p {
+    font-size: 14px;
+  }
+}
+
+.shop-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.info-section {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.info-section.full-width {
+  grid-column: 1 / -1;
+}
+
+.info-section h3 {
+  font-size: 16px;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-section h3 i {
+  color: #007bff;
+}
+
+.products-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.product-tag {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .shop-info-grid {
+    grid-template-columns: 1fr;
+  }
+}

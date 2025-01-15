@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - DINE</title>
+    <link rel="stylesheet" href="./css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                กลับไปหน้าหลัก
+            </a>
+            <h1>จัดการร้านค้า</h1>
+        </header>
+
+        <div class="shop-controls">
+            <button class="add-btn" onclick="showAddForm()">
+                <i class="fas fa-plus"></i>
+                เพิ่มร้านค้าใหม่
+            </button>
+            <div class="filter-controls">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="ค้นหาร้านค้า..." onkeyup="filterShops()">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="filters">
+                    <select id="categoryFilter" onchange="filterShops()">
+                        <option value="all">ทุกหมวดหมู่</option>
+                        <option value="thai-food">อาหารไทย</option>
+                        <option value="international-food">อาหารนานาชาติ</option>
+                        <option value="japanese-food">อาหารญี่ปุ่น</option>
+                        <option value="desserts-and-drinks">ของหวานและเครื่องดื่ม</option>
+                    </select>
+                    <select id="locationFilter" onchange="filterShops()">
+                        <option value="all">ทุกพื้นที่</option>
+                        <option value="public">Public Area</option>
+                        <option value="transit">Transit Area</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="shop-list">
+            <!-- รายการร้านค้าจะถูกเพิ่มโดย JavaScript -->
+        </div>
+    </div>
+
+    <!-- Modal Form -->
+    <div id="shopFormModal" style="display: none;" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">เพิ่มร้านค้าใหม่</h2>
+            <form id="shopForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label>ชื่อร้าน:</label>
+                    <input type="text" name="name" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>หมวดหมู่:</label>
+                        <select name="category" required>
+                            <option value="thai-food">อาหารไทย</option>
+                            <option value="international-food">อาหารนานาชาติ</option>
+                            <option value="japanese-food">อาหารญี่ปุ่น</option>
+                            <option value="desserts-and-drinks">ของหวานและเครื่องดื่ม</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Terminal:</label>
+                        <select name="terminal" required>
+                            <option value="1">Terminal 1</option>
+                            <option value="2">Terminal 2</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>ชั้น:</label>
+                        <select name="floor" required>
+                            <option value="1">ชั้น 1</option>
+                            <option value="2">ชั้น 2</option>
+                            <option value="3">ชั้น 3</option>
+                            <option value="4">ชั้น 4</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Zone:</label>
+                        <select name="zone" required>
+                            <option value="Food Court Zone A">Zone A</option>
+                            <option value="Food Court Zone B">Zone B</option>
+                            <option value="Food Court Zone C">Zone C</option>
+                            <option value="Food Court Zone D">Zone D</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>พื้นที่:</label>
+                        <select name="locationType" required>
+                            <option value="public">Public Area</option>
+                            <option value="transit">Transit Area</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>เวลาทำการ:</label>
+                        <input type="text" name="hours" placeholder="เช่น 06:00 - 22:00" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>เบอร์ติดต่อ:</label>
+                    <input type="text" name="contact" required>
+                </div>
+
+                <div class="form-group">
+                    <label>รายการสินค้า (คั่นด้วยเครื่องหมาย ,):</label>
+                    <textarea name="products" rows="3" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>คำอธิบายร้านค้า:</label>
+                    <textarea name="description" rows="3"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>รูปภาพหน้าร้าน:</label>
+                        <input type="file" name="image" accept="image/*" onchange="previewImage(this, 'previewImg')">
+                        <img id="previewImg" style="display: none; max-width: 200px; margin-top: 10px;">
+                    </div>
+
+                    <div class="form-group">
+                        <label>รูปภาพเพิ่มเติม:</label>
+                        <input type="file" name="detailImage" accept="image/*" onchange="previewImage(this, 'detailPreviewImg')">
+                        <img id="detailPreviewImg" style="display: none; max-width: 200px; margin-top: 10px;">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="save-btn">
+                        <i class="fas fa-save"></i>
+                        บันทึก
+                    </button>
+                    <button type="button" class="cancel-btn" onclick="closeModal()">
+                        <i class="fas fa-times"></i>
+                        ยกเลิก
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="./data/shops.js"></script>
+    <script src="./js/admin.js"></script>
+</body>
+</html>

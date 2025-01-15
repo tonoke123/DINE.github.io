@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airport Shop</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/popup.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>DINE</h1>
+    </div>
+    <div class="breadcrumbs">
+      Home / / Dining
+    </div>
+    <div class="search-bar">
+      <input type="text" placeholder="ค้นหาร้านอาหาร เมนู หรือประเภทอาหาร...">
+      <button type="button">
+        <i class="fas fa-search"></i>
+        ค้นหา
+      </button>
+    </div>
+    <div class="categories">
+      <div onclick="filterShops('all')" class="category-item active">
+        <i class="fas fa-utensils"></i>
+        <span>ทั้งหมด</span>
+      </div>
+      <div onclick="filterShops('thai-food')" class="category-item">
+        <i class="fas fa-pepper-hot"></i>
+        <span>อาหารไทย</span>
+      </div>
+      <div onclick="filterShops('international-food')" class="category-item">
+        <i class="fas fa-hamburger"></i>
+        <span>อาหารนานาชาติ</span>
+      </div>
+      <div onclick="filterShops('japanese-food')" class="category-item">
+        <i class="fas fa-fish"></i>
+        <span>อาหารญี่ปุ่น</span>
+      </div>
+      <div onclick="filterShops('desserts-and-drinks')" class="category-item">
+        <i class="fas fa-ice-cream"></i>
+        <span>ของหวาน & เครื่องดื่ม</span>
+      </div>
+    </div>
+    <div class="location-filters">
+      <div class="filter-group">
+        <label for="terminal">Terminal:</label>
+        <select id="terminal" onchange="switchTerminal(this.value)">
+          <option value="all">ทั้งหมด</option>
+          <option value="1">Terminal 1</option>
+          <option value="2">Terminal 2</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="floor">ชั้น:</label>
+        <select id="floor" onchange="switchFloor(this.value)">
+          <option value="all">ทั้งหมด</option>
+          <option value="1">ชั้น 1</option>
+          <option value="2">ชั้น 2</option>
+          <option value="3">ชั้น 3</option>
+          <option value="4">ชั้น 4</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="area">Area:</label>
+        <select id="area" onchange="switchArea(this.value)">
+          <option value="all">ทั้งหมด</option>
+          <option value="public">Public Area</option>
+          <option value="transit">Transit Area</option>
+        </select>
+      </div>
+    </div>
+    <div class="shop-grid">
+      <!-- ข้อมูลร้านค้าจะถูกเพิ่มโดย JavaScript -->
+    </div>
+
+    <div class="popup-overlay" id="popupOverlay">
+      <div class="popup">
+        <!-- popup content จะถูกเพิ่มโดย JavaScript -->
+      </div>
+    </div>
+    
+    <!-- เพิ่มปุ่ม Admin -->
+    <a href="admin.html" class="admin-button">
+      <i class="fas fa-cog"></i>
+      <span>Admin</span>
+    </a>
+  </div>
+  <!-- เรียงลำดับการโหลด scripts ใหม่ -->
+  <script src="./data/shops.js"></script>
+  <script src="./js/popup.js"></script>
+  <script src="./js/shop.js"></script>
+</body>
+</html>
+
